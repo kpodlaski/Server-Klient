@@ -17,7 +17,7 @@ Now we can create instance of the image, the instance is called a container:
     + *--rm* &ndash; remove container after closing it
     + *--name container_name* &ndash; a name for our container (can be usefull later)
     + *-v .:/workspace* &ndash; share the local folder with the container, the folder can be accessed inside the container via path /workspace
-    + *image_name* &ndash; the name we want to instantiate
+    + *image_name* &ndash; the name of the image we want to instantiate
 
 # Run a command in a container
 If we have running container we can run a new comand inside it
