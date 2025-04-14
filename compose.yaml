@@ -27,3 +27,13 @@ services:
       - ".:/workspace"
     working_dir: /workspace/python_code
     #command: "python3 SimpleClientSockAPI.py ncat_server:8080 JabberWooky_python"
+
+  flask_server:
+    container_name: flask_server
+    hostname: flask_server
+    image: my-gcc-app
+    #build: .
+    volumes:
+      - ".:/workspace"
+    ports:
+      - 5000:5000
