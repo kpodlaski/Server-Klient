@@ -1,4 +1,9 @@
 <html>
 
 Fomularz dla wysyłania zapytania POST
+<form action="files/nowyPlik" method="post" enctype="multipart/form-data">
+    <input type="text" name="filename" value="Nazwa pliku"/>
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Wyślij" name="submit">
+</form>
 </html>
