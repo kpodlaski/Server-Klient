@@ -7,4 +7,6 @@ RUN apt-get install -y net-tools
 # ss and nsenter 
 RUN apt-get install -y iproute2
 RUN apt install -y python3-flask
+RUN apt install -y pip
+RUN apt install -y python3-pillow
 WORKDIR /workspace

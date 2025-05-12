@@ -2,6 +2,10 @@ import os
 import json
 from flask import Flask, request
 from flask import make_response
+import flask
+
+from PIL import Image
+import io
 
 app = Flask(__name__)
 
@@ -51,3 +55,18 @@ def file_post(filename):
         out.writelines(filebody)
 
         return {"Status": "OK"}
+
+
+@app.route('/rotate/<angle>', methods = ['POST'])
+def img_rotate(angle):
+    #buf = request.get_data(as_text=False)
+    file = request.files.get('image')
+    format = request.mimetype.split("/")[1]
+    img = Image.open(file)
+    #img = Image.frombytes(mode="L", size=(1500, 500), data=buf, )
+ 
+ 
+    memfile = io.BytesIO()
+    img.rotate(angle=int(angle), expand=True).save(memfile, format="png")
+    memfile.seek(0, io.SEEK_SET)
+    return flask.send_file(memfile, mimetype="image/png")
