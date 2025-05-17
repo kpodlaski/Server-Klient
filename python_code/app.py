@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request
+from flask import Flask, request, Response
 from flask import make_response
 import flask
 
@@ -70,3 +70,23 @@ def img_rotate(angle):
     img.rotate(angle=int(angle), expand=True).save(memfile, format="png")
     memfile.seek(0, io.SEEK_SET)
     return flask.send_file(memfile, mimetype="image/png")
+
+#For pgsql 
+import psycopg2
+@app.route('/pgtest')
+def pgtest():
+    conn = psycopg2.connect(database="appdb",
+                        host="postgres",
+                        user="dbuser",
+                        password="dbuser",
+                        port="5432")
+    cur = conn.cursor()
+    cur.execute('SELECT * FROM Pracownik')
+    persons = cur.fetchall()
+    resp = "<html><head></head><body>"
+    for p in persons:
+        resp += str(p)
+        resp += "</br>"
+    cur.close()
+    resp += "</body></html>"
+    return resp

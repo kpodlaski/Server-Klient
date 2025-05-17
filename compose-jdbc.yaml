@@ -1,0 +1,35 @@
+services:
+
+  pgsql:
+    image: postgres
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: passABC
+    volumes:
+      #- pgdata:/var/lib/postgresql/data
+      - "./pgsql/pracownicy.sql:/tmp/pracownicy.sql"
+      - "./pgsql/init_db.sh:/docker-entrypoint-initdb.d/init-db.sh"
+
+  jdbc_client:
+    image: my-gcc-app
+    #build: .
+    volumes:
+      - ".:/workspace"
+    working_dir: /workspace/java_code
+    environment:
+      - DB_ADDRESS=postgres
+    command: "java -classpath \".:./postgresql-42.7.5.jar\" eu.vctl.wfis.PgSQLClient"
+
+  flask_server:
+    hostname: flask_server
+    image: my-gcc-app
+    #build: .
+    volumes:
+      - ".:/workspace"
+    ports:
+      - "5000:5000"
+    working_dir: /workspace/python_code
+    command: "flask run --host=0.0.0.0"
+
