@@ -20,6 +20,9 @@ services:
     working_dir: /workspace/java_code
     environment:
       - DB_ADDRESS=postgres
+    depends_on:
+      pgsql:
+        condition: service_started
     command: "java -classpath \".:./postgresql-42.7.5.jar\" eu.vctl.wfis.PgSQLClient"
 
   flask_server:

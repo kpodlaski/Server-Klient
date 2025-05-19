@@ -23,7 +23,22 @@ public class PgSQLClient{
         Properties props = new Properties();
         props.setProperty("user", userName);
         props.setProperty("password", passwd);
-        conn = DriverManager.getConnection(cstring, props);
+        for (int i=0; i<5; i++){
+            try{
+                conn = DriverManager.getConnection(cstring, props);
+            }
+            catch (Exception e){
+                if (i==4) throw e;
+                else{
+                    conn = null;
+                    System.out.println(" Connection is not ready yet!!!");
+                    System.out.println("Waiting 1s");
+                    Thread.sleep(1000);
+                }
+            }
+            if (conn != null) break;
+        }
+            
         return true;
     }
 
