@@ -37,6 +37,17 @@ services:
       - "5000:5000"
     working_dir: /workspace/python_code
     command: "flask run --host=0.0.0.0"
+  
+  mariadb:
+    image: mariadb
+    hostname: mariadb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: appdb
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - "./mariadb/:/docker-entrypoint-initdb.d"
 
   pgsql:
     image: postgres
