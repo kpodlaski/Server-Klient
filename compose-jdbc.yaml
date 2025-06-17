@@ -23,7 +23,7 @@ services:
     depends_on:
       pgsql:
         condition: service_started
-    command: "java -classpath \".:./postgresql-42.7.5.jar\" eu.vctl.wfis.PgSQLClient"
+    command: "bash run.sh"
 
   flask_server:
     hostname: flask_server

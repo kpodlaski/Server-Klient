@@ -69,5 +69,5 @@ services:
     working_dir: /workspace/java_code
     environment:
       - DB_ADDRESS=postgres
-    #command: "java -classpath \".;./postgresql-42.7.5.jar\" eu.vctl.wfis.PgSQLClient"
+    command: "java -classpath \".:./postgresql-42.7.5.jar\" eu.vctl.wfis.PgSQLClient"
 

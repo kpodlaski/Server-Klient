@@ -1,0 +1,47 @@
+------WebKitFormBoundaryHhWcLIkwdpNBQL9F
+Content-Disposition: form-data; name="filename"
+
+Plik123
+------WebKitFormBoundaryHhWcLIkwdpNBQL9F
+Content-Disposition: form-data; name="fileToUpload"; filename="client.py"
+Content-Type: text/x-python
+
+#!/usr/bin/python3
+import sys
+import socket
+
+if __name__ == "__main__":
+
+    if len(sys.argv) < 2:
+        print("Use: %s <addr:port> [<msg>]", sys.argv[0])
+        sys.exit(1)
+
+
+    host, port = sys.argv[1].split(':', 1)
+
+    msg = " ".join(sys.argv[2:])
+
+    sock = socket.socket()
+
+    sock.connect((host, int(port)))
+    
+    # Send message from cmdline to server 
+    out = sock.makefile(mode = 'w')
+    out.write(msg)
+    out.write("\n")
+    out.flush()
+
+    # Get data from server nad print on stdout 
+    inp = sock.makefile(mode='r')
+    line = inp.readline()
+    print(line)
+
+    inp.close()
+    out.close()
+
+    sock.close()
+------WebKitFormBoundaryHhWcLIkwdpNBQL9F
+Content-Disposition: form-data; name="submit"
+
+Wyślij
+------WebKitFormBoundaryHhWcLIkwdpNBQL9F--

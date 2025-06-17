@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Properties;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSetMetaData;
 
 
 // DOWNLOAD DRIVER:
@@ -51,6 +53,20 @@ public class PgSQLClient{
             System.out.print(" ");
             System.out.println(rst.getString("nazwisko"));
         }
+      // ResultSetMetaData dbMeta = rst.getMetaData();
+      // int count = dbMeta.getColumnCount();
+      // for(int i=1; i<=count; i++){
+      //     System.out.println(i +":"+ dbMeta.getColumnName(i)+"::"+dbMeta.getColumnType(i) );
+      // }
+      //ResultSet tables = dbmsMeta.getTables(null, null, null, null);
+      //Printing the column name and size
+      // while (tables.next()) {
+      //    System.out.println("Table name: "+tables.getString("Table_NAME"));
+      //    System.out.println("Table type: "+tables.getString("TABLE_TYPE"));
+      //    System.out.println("Table schema: "+tables.getString("TABLE_SCHEM"));
+      //    System.out.println("Table catalog: "+tables.getString("TABLE_CAT"));
+      //    System.out.println(" ");
+      // }
     }
 
     public void closeConnection() throws Exception {
